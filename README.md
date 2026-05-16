@@ -80,11 +80,12 @@ config.
 ## Commands
 
 ```sh
-pro-terminal-setup doctor     # check installed tools
-pro-terminal-setup backup     # back up managed files
-pro-terminal-setup install    # apply configs, backing up first
-pro-terminal-setup uninstall  # remove managed files, keeping backups
-terminal-intro                # guided tour of the setup
+pro-terminal-setup doctor         # check installed tools
+pro-terminal-setup doctor --json  # machine-readable tool status
+pro-terminal-setup backup         # back up managed files
+pro-terminal-setup install        # apply configs, backing up first
+pro-terminal-setup uninstall      # remove managed files, keeping backups
+terminal-intro                    # guided tour of the setup
 ```
 
 ## Everyday Examples
