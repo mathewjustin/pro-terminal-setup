@@ -6,7 +6,7 @@
 
 Turn a fresh macOS or Linux shell into a polished Kubernetes-ready terminal in minutes.
 
-![Real terminal transcript demo](assets/terminal-real-demo.svg)
+![Animated install demo](assets/install-demo.gif)
 
 `pro-terminal-setup` is a portable Ghostty/zsh setup with a curated prompt,
 navigation, fuzzy finding, Kubernetes shortcuts, k9s, and tmux defaults.
@@ -133,6 +133,13 @@ docker run --rm homebrew/brew:latest bash -lc '
   HOME=/tmp/testhome pro-terminal-setup install
   HOME=/tmp/testhome /tmp/testhome/.local/bin/terminal-intro | head
 '
+```
+
+Regenerate the animated demo:
+
+```sh
+brew install vhs
+vhs assets/install-demo.tape
 ```
 
 ## Launch Notes
