@@ -6,7 +6,7 @@
 
 Turn a fresh macOS or Linux shell into a polished Kubernetes-ready terminal in minutes.
 
-![Pro Terminal demo](assets/terminal-demo.svg)
+![Real terminal transcript demo](assets/terminal-real-demo.svg)
 
 `pro-terminal-setup` is a portable Ghostty/zsh setup with a curated prompt,
 navigation, fuzzy finding, Kubernetes shortcuts, k9s, and tmux defaults.
