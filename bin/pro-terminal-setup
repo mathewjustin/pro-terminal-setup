@@ -1,0 +1,61 @@
+#!/usr/bin/env sh
+set -eu
+
+prefix="$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)"
+home="${HOME:?HOME is not set}"
+
+install_file() {
+  src="$1"
+  dst="$2"
+  mkdir -p "$(dirname -- "$dst")"
+  if [ -e "$dst" ] && ! cmp -s "$src" "$dst"; then
+    backup="$dst.backup.$(date +%Y%m%d%H%M%S)"
+    cp "$dst" "$backup"
+    printf 'Backed up %s to %s\n' "$dst" "$backup"
+  fi
+  cp "$src" "$dst"
+}
+
+append_source_line() {
+  zshrc="$home/.zshrc"
+  line='[ -f "$HOME/.config/pro-terminal/zsh.zsh" ] && source "$HOME/.config/pro-terminal/zsh.zsh"'
+  touch "$zshrc"
+  if ! grep -Fq "$line" "$zshrc"; then
+    {
+      printf '\n'
+      printf '# Pro terminal setup\n'
+      printf '%s\n' "$line"
+    } >> "$zshrc"
+    printf 'Updated %s\n' "$zshrc"
+  else
+    printf '%s already sources pro-terminal.\n' "$zshrc"
+  fi
+}
+
+case "${1:-install}" in
+  install)
+    install_file "$prefix/config/pro-terminal/zsh.zsh" "$home/.config/pro-terminal/zsh.zsh"
+    install_file "$prefix/config/pro-terminal/intro.sh" "$home/.config/pro-terminal/intro.sh"
+    install_file "$prefix/config/pro-terminal/Brewfile" "$home/.config/pro-terminal/Brewfile"
+    install_file "$prefix/config/starship/starship.toml" "$home/.config/starship.toml"
+    install_file "$prefix/config/ghostty/config.ghostty" "$home/.config/ghostty/config.ghostty"
+    install_file "$prefix/config/tmux.conf" "$home/.tmux.conf"
+    chmod +x "$home/.config/pro-terminal/intro.sh"
+    append_source_line
+    printf '\nInstalled pro terminal setup.\n'
+    printf 'Open a new terminal, then run: terminal-intro\n'
+    ;;
+  doctor)
+    for cmd in ghostty zsh starship zoxide eza bat fd rg fzf kubectl k9s tmux; do
+      if command -v "$cmd" >/dev/null 2>&1; then
+        printf 'ok   %s -> %s\n' "$cmd" "$(command -v "$cmd")"
+      else
+        printf 'miss %s\n' "$cmd"
+      fi
+    done
+    ;;
+  *)
+    printf 'Usage: pro-terminal-setup [install|doctor]\n' >&2
+    exit 2
+    ;;
+esac
