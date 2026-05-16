@@ -4,6 +4,16 @@ set -eu
 prefix="${PRO_TERMINAL_PREFIX:-$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)}"
 home="${HOME:?HOME is not set}"
 
+managed_files="
+$home/.config/pro-terminal/zsh.zsh
+$home/.config/pro-terminal/intro.sh
+$home/.config/pro-terminal/Brewfile
+$home/.config/starship.toml
+$home/.config/ghostty/config.ghostty
+$home/.tmux.conf
+$home/.local/bin/terminal-intro
+"
+
 install_file() {
   src="$1"
   dst="$2"
@@ -14,6 +24,21 @@ install_file() {
     printf 'Backed up %s to %s\n' "$dst" "$backup"
   fi
   cp "$src" "$dst"
+}
+
+backup_files() {
+  backup_dir="$home/.config/pro-terminal/backups/$(date +%Y%m%d%H%M%S)-$$"
+  mkdir -p "$backup_dir"
+  copied=0
+  for file in $managed_files "$home/.zshrc"; do
+    if [ -e "$file" ]; then
+      rel="$(printf '%s' "$file" | sed "s|^$home/||")"
+      mkdir -p "$backup_dir/$(dirname -- "$rel")"
+      cp "$file" "$backup_dir/$rel"
+      copied=$((copied + 1))
+    fi
+  done
+  printf 'Backed up %s file(s) to %s\n' "$copied" "$backup_dir"
 }
 
 append_source_line() {
@@ -32,8 +57,19 @@ append_source_line() {
   fi
 }
 
+remove_source_line() {
+  zshrc="$home/.zshrc"
+  line='[ -f "$HOME/.config/pro-terminal/zsh.zsh" ] && source "$HOME/.config/pro-terminal/zsh.zsh"'
+  [ -f "$zshrc" ] || return 0
+  tmp="$zshrc.tmp.$$"
+  grep -Fv "$line" "$zshrc" | grep -Fv '# Pro terminal setup' > "$tmp" || true
+  mv "$tmp" "$zshrc"
+  printf 'Removed pro-terminal source line from %s\n' "$zshrc"
+}
+
 case "${1:-install}" in
   install)
+    backup_files
     install_file "$prefix/config/pro-terminal/zsh.zsh" "$home/.config/pro-terminal/zsh.zsh"
     install_file "$prefix/config/pro-terminal/intro.sh" "$home/.config/pro-terminal/intro.sh"
     install_file "$prefix/config/pro-terminal/Brewfile" "$home/.config/pro-terminal/Brewfile"
@@ -61,6 +97,9 @@ INTRO
     printf '\nInstalled pro terminal setup.\n'
     printf 'Open a new terminal, then run: terminal-intro\n'
     ;;
+  backup)
+    backup_files
+    ;;
   doctor)
     for cmd in ghostty zsh starship zoxide eza bat fd rg fzf kubectl k9s tmux; do
       if command -v "$cmd" >/dev/null 2>&1; then
@@ -70,8 +109,19 @@ INTRO
       fi
     done
     ;;
+  uninstall)
+    backup_files
+    remove_source_line
+    for file in $managed_files; do
+      if [ -e "$file" ]; then
+        rm -f "$file"
+        printf 'Removed %s\n' "$file"
+      fi
+    done
+    printf '\nUninstalled pro terminal setup files. Backups were kept.\n'
+    ;;
   *)
-    printf 'Usage: pro-terminal-setup [install|doctor]\n' >&2
+    printf 'Usage: pro-terminal-setup [install|doctor|backup|uninstall]\n' >&2
     exit 2
     ;;
 esac

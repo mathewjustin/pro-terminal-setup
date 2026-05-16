@@ -1,0 +1,24 @@
+name: Docker smoke test
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test Homebrew install in a clean container
+        run: |
+          docker run --rm homebrew/brew:latest bash -lc '
+            set -euo pipefail
+            export HOMEBREW_NO_AUTO_UPDATE=1
+            brew update >/dev/null
+            brew install mathewjustin/pro-terminal/pro-terminal-setup
+            pro-terminal-setup doctor
+            mkdir -p /tmp/testhome
+            HOME=/tmp/testhome pro-terminal-setup install
+            HOME=/tmp/testhome /tmp/testhome/.local/bin/terminal-intro | head
+            HOME=/tmp/testhome zsh -lc "source ~/.zshrc; command -v terminal-intro starship zoxide eza bat fd rg fzf kubectl k9s tmux; alias k; alias kg; alias k9; alias k9a; test -f ~/.config/pro-terminal/zsh.zsh; test -f ~/.config/starship.toml; test -f ~/.config/ghostty/config.ghostty; test -f ~/.tmux.conf"
+          '
