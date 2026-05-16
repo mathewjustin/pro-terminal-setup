@@ -81,9 +81,15 @@ Sleep 500ms
 
 Type "printf 'Kubernetes shortcuts\\n\\n'"
 Enter
-Type "HOME=/tmp/pro-terminal-demo zsh -lc 'source ~/.zshrc; alias k; alias kg; alias kd; alias kl; alias k9; alias k9a'"
+Type "printf 'Aliases are configured automatically by pro-terminal-setup.\\n'"
 Enter
-Type "printf '\\nExamples: k get pods | kns default | k9 | k9a\\n\\n'"
+Type "printf 'No manual alias setup needed. Just open a new shell.\\n\\n'"
+Enter
+Type "printf 'Try: k get pods\\n'"
+Enter
+Type "printf 'Try: kns default\\n'"
+Enter
+Type "printf 'Try: k9 or k9a\\n\\n'"
 Enter
 Sleep 2s
 
