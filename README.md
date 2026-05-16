@@ -11,6 +11,21 @@ Turn a fresh macOS or Linux shell into a polished Kubernetes-ready terminal in m
 `pro-terminal-setup` is a portable Ghostty/zsh setup with a curated prompt,
 navigation, fuzzy finding, Kubernetes shortcuts, k9s, and tmux defaults.
 
+## Why This Exists
+
+Dotfiles are personal and powerful, but they can be hard to audit before running
+on a new machine. This project is a small Homebrew-installable setup for the
+terminal stack I kept rebuilding: prompt, navigation, search, Kubernetes tools,
+and tmux.
+
+It aims to be boring in the right places:
+
+- one install command
+- explicit `pro-terminal-setup install` step
+- backups before replacing managed files
+- `doctor`, `backup`, and `uninstall` commands
+- Docker smoke test for the Homebrew install path
+
 ## Install
 
 ```sh
@@ -29,6 +44,18 @@ Ghostty is a GUI app and is installed separately:
 ```sh
 brew install --cask ghostty
 ```
+
+## Safety First
+
+Before changing files, `install` backs up existing managed files under:
+
+```text
+~/.config/pro-terminal/backups/
+```
+
+The setup does not collect secrets, upload shell history, or install background
+services. It writes plain shell config, Starship TOML, Ghostty config, and tmux
+config.
 
 ## What You Get
 
