@@ -101,7 +101,7 @@ INTRO
     backup_files
     ;;
   doctor)
-    for cmd in ghostty zsh starship zoxide eza bat fd rg fzf kubectl k9s tmux; do
+    for cmd in ghostty zsh starship zoxide eza bat fd rg fzf jq yq kubectl k9s tmux; do
       if command -v "$cmd" >/dev/null 2>&1; then
         printf 'ok   %s -> %s\n' "$cmd" "$(command -v "$cmd")"
       else

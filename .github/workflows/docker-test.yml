@@ -20,5 +20,5 @@ jobs:
             mkdir -p /tmp/testhome
             HOME=/tmp/testhome pro-terminal-setup install
             HOME=/tmp/testhome /tmp/testhome/.local/bin/terminal-intro | head
-            HOME=/tmp/testhome zsh -lc "source ~/.zshrc; command -v terminal-intro starship zoxide eza bat fd rg fzf kubectl k9s tmux; alias k; alias kg; alias k9; alias k9a; test -f ~/.config/pro-terminal/zsh.zsh; test -f ~/.config/starship.toml; test -f ~/.config/ghostty/config.ghostty; test -f ~/.tmux.conf"
+            HOME=/tmp/testhome zsh -lc "source ~/.zshrc; command -v terminal-intro starship zoxide eza bat fd rg fzf jq yq kubectl k9s tmux; alias k; alias kg; alias k9; alias k9a; test -f ~/.config/pro-terminal/zsh.zsh; test -f ~/.config/starship.toml; test -f ~/.config/ghostty/config.ghostty; test -f ~/.tmux.conf"
           '

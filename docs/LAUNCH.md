@@ -5,8 +5,8 @@ Use this after the README and Docker smoke test are green.
 ## Short Pitch
 
 Turn a fresh macOS or Linux shell into a polished Kubernetes-ready terminal in minutes:
-Ghostty, zsh, Starship, zoxide, fzf, eza, bat, fd, ripgrep, kubectl aliases,
-k9s, and tmux.
+Ghostty, zsh, Starship, zoxide, fzf, eza, bat, fd, ripgrep, jq, yq, kubectl
+aliases, k9s, and tmux.
 
 ## Install Snippet
 
@@ -68,7 +68,7 @@ Body:
 I kept rebuilding the same terminal setup across machines, so I packaged it.
 
 It installs a portable zsh layer with Starship, zoxide, fzf, eza, bat, fd,
-ripgrep, kubectl aliases, k9s, and tmux. Ghostty config is included too, but
+ripgrep, jq, yq, kubectl aliases, k9s, and tmux. Ghostty config is included too, but
 Ghostty itself stays a separate GUI install.
 
 Install:
@@ -107,8 +107,8 @@ Text:
 
 ```text
 I packaged my terminal setup so I can rebuild it on fresh macOS/Linux machines.
-It includes Starship, zoxide, fzf, eza, bat, fd, ripgrep, kubectl aliases, k9s,
-tmux, and Ghostty config.
+It includes Starship, zoxide, fzf, eza, bat, fd, ripgrep, jq, yq, kubectl
+aliases, k9s, tmux, and Ghostty config.
 
 Install:
 brew install mathewjustin/pro-terminal/pro-terminal-setup
@@ -123,7 +123,7 @@ smoke-tested in a clean Homebrew Docker container.
 ```text
 I packaged my portable terminal setup as a Homebrew formula.
 
-Ghostty + zsh + Starship + zoxide + fzf + eza/bat/fd/rg + kubectl aliases + k9s + tmux.
+Ghostty + zsh + Starship + zoxide + fzf + eza/bat/fd/rg + jq/yq + kubectl aliases + k9s + tmux.
 
 brew install mathewjustin/pro-terminal/pro-terminal-setup
 pro-terminal-setup install

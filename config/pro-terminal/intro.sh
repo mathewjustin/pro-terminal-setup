@@ -4,7 +4,7 @@ cat <<'EOF'
 Pro Terminal Intro
 
 This setup is a portable terminal workflow for Ghostty, zsh, Starship,
-zoxide, fzf, modern Unix tools, Kubernetes, k9s, and tmux.
+zoxide, fzf, modern Unix tools, jq/yq, Kubernetes, k9s, and tmux.
 
 1. The Pieces
 
@@ -63,6 +63,12 @@ fd Employee
 
 rg EmployeeService
   Search inside files for EmployeeService.
+
+jq . package.json
+  Pretty-print or query JSON.
+
+yq . values.yaml
+  Pretty-print or query YAML.
 
 4. fzf Shortcuts
 
@@ -159,6 +165,8 @@ Try these:
   zi
   fd java
   rg Employee
+  jq . package.json
+  yq . values.yaml
   cat pom.xml
   tmux
   k9
