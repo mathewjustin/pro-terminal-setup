@@ -67,6 +67,76 @@ remove_source_line() {
   printf 'Removed pro-terminal source line from %s\n' "$zshrc"
 }
 
+doctor_tools='ghostty zsh starship zoxide eza bat fd rg fzf jq yq kubectl k9s tmux'
+
+detect_version() {
+  cmd="$1"
+  case "$cmd" in
+    kubectl)
+      "$cmd" version --client --short 2>/dev/null | head -n 1 || true
+      ;;
+    k9s)
+      "$cmd" version --short 2>/dev/null | head -n 1 || true
+      ;;
+    tmux)
+      "$cmd" -V 2>/dev/null | head -n 1 || true
+      ;;
+    *)
+      "$cmd" --version 2>/dev/null | head -n 1 || true
+      ;;
+  esac
+}
+
+json_escape() {
+  printf '%s' "$1" | sed 's/\\/\\\\/g; s/"/\\"/g'
+}
+
+json_string() {
+  printf '"%s"' "$(json_escape "$1")"
+}
+
+doctor_text() {
+  for cmd in $doctor_tools; do
+    if command -v "$cmd" >/dev/null 2>&1; then
+      printf 'ok   %s -> %s\n' "$cmd" "$(command -v "$cmd")"
+    else
+      printf 'miss %s\n' "$cmd"
+    fi
+  done
+}
+
+doctor_json() {
+  printf '{\n  "checks": [\n'
+  first=1
+  for cmd in $doctor_tools; do
+    if [ "$first" -eq 0 ]; then
+      printf ',\n'
+    fi
+    first=0
+
+    printf '    {"command":'
+    json_string "$cmd"
+    if command -v "$cmd" >/dev/null 2>&1; then
+      path="$(command -v "$cmd")"
+      version="$(detect_version "$cmd")"
+      printf ',"status":"ok","path":'
+      json_string "$path"
+      printf ',"version":'
+      if [ -n "$version" ]; then
+        json_string "$version"
+      else
+        printf 'null'
+      fi
+      printf ',"hint":null}'
+    else
+      printf ',"status":"missing","path":null,"version":null,"hint":'
+      json_string "Install with Homebrew or run brew bundle with the managed Brewfile."
+      printf '}'
+    fi
+  done
+  printf '\n  ]\n}\n'
+}
+
 case "${1:-install}" in
   install)
     backup_files
@@ -101,13 +171,18 @@ INTRO
     backup_files
     ;;
   doctor)
-    for cmd in ghostty zsh starship zoxide eza bat fd rg fzf jq yq kubectl k9s tmux; do
-      if command -v "$cmd" >/dev/null 2>&1; then
-        printf 'ok   %s -> %s\n' "$cmd" "$(command -v "$cmd")"
-      else
-        printf 'miss %s\n' "$cmd"
-      fi
-    done
+    case "${2:-}" in
+      "")
+        doctor_text
+        ;;
+      --json)
+        doctor_json
+        ;;
+      *)
+        printf 'Usage: pro-terminal-setup [install|doctor [--json]|backup|uninstall]\n' >&2
+        exit 2
+        ;;
+    esac
     ;;
   uninstall)
     backup_files
@@ -121,7 +196,7 @@ INTRO
     printf '\nUninstalled pro terminal setup files. Backups were kept.\n'
     ;;
   *)
-    printf 'Usage: pro-terminal-setup [install|doctor|backup|uninstall]\n' >&2
+    printf 'Usage: pro-terminal-setup [install|doctor [--json]|backup|uninstall]\n' >&2
     exit 2
     ;;
 esac
