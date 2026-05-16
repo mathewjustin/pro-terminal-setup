@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 set -eu
 
-prefix="$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)"
+prefix="${PRO_TERMINAL_PREFIX:-$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)}"
 home="${HOME:?HOME is not set}"
 
 install_file() {
@@ -40,6 +40,16 @@ case "${1:-install}" in
     install_file "$prefix/config/starship/starship.toml" "$home/.config/starship.toml"
     install_file "$prefix/config/ghostty/config.ghostty" "$home/.config/ghostty/config.ghostty"
     install_file "$prefix/config/tmux.conf" "$home/.tmux.conf"
+    if command -v zsh >/dev/null 2>&1; then
+      zsh_path="$(command -v zsh)"
+      tmp_tmux="$home/.tmux.conf.tmp.$$"
+      awk -v shell="$zsh_path" '
+        /^set -g default-shell / { print "set -g default-shell " shell; next }
+        /^set -g default-command / { print "set -g default-command " shell; next }
+        { print }
+      ' "$home/.tmux.conf" > "$tmp_tmux"
+      mv "$tmp_tmux" "$home/.tmux.conf"
+    fi
     chmod +x "$home/.config/pro-terminal/intro.sh"
     append_source_line
     printf '\nInstalled pro terminal setup.\n'
