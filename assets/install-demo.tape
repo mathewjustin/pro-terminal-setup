@@ -12,46 +12,44 @@ Set Width 1200
 Set Height 760
 Set Padding 18
 Set Framerate 24
-Set TypingSpeed 28ms
+Set TypingSpeed 30ms
 Set Theme "Catppuccin Mocha"
 Set WindowBar Colorful
 Set BorderRadius 14
 
 Hide
-Type "rm -rf /tmp/pro-terminal-demo"
-Enter
-Type "mkdir -p /tmp/pro-terminal-demo"
-Enter
-Type "zoxide add /home/justin/hr-solution >/dev/null 2>&1 || true"
+Type "export PATH=/home/justin/pro-terminal-setup-src/assets/demo-bin:$PATH"
 Enter
 Type "clear"
 Enter
 Show
 
 Sleep 500ms
-Type "printf 'Pro Terminal Setup\\n'"
+Type "brew install mathewjustin/pro-terminal/pro-terminal-setup"
 Enter
-Type "printf 'A portable Ghostty + zsh + Kubernetes terminal workflow.\\n\\n'"
+Sleep 2s
+
+Type "pro-terminal-setup install"
+Enter
+Sleep 2s
+
+Type "terminal-intro"
+Enter
+Sleep 3s
+
+Type "clear"
+Enter
+Sleep 500ms
+
+Type "z hr"
 Enter
 Sleep 1s
 
-Type "brew install mathewjustin/pro-terminal/pro-terminal-setup >/dev/null"
-Enter
-Type "printf '✓ formula installed: starship zoxide fzf eza bat fd rg kubectl k9s tmux\\n\\n'"
+Type "fd Controller.java ~/hr-solution"
 Enter
 Sleep 1s
 
-Type "HOME=/tmp/pro-terminal-demo pro-terminal-setup install >/dev/null"
-Enter
-Type "printf '✓ configs applied to a fresh HOME\\n'"
-Enter
-Type "printf '✓ backups are automatic\\n'"
-Enter
-Type "printf '✓ run terminal-intro for the guided tour\\n\\n'"
-Enter
-Sleep 1s
-
-Type "HOME=/tmp/pro-terminal-demo /tmp/pro-terminal-demo/.local/bin/terminal-intro | sed -n '1,14p'"
+Type "rg @RestController ~/hr-solution"
 Enter
 Sleep 2s
 
@@ -59,19 +57,15 @@ Type "clear"
 Enter
 Sleep 500ms
 
-Type "printf 'Everyday workflow examples\\n\\n'"
-Enter
-Type "printf 'zoxide: smarter cd\\n'"
-Enter
-Type "HOME=/tmp/pro-terminal-demo zsh -lc 'source ~/.zshrc; zoxide add /home/justin/hr-solution; zoxide query hr'"
+Type "k get pods"
 Enter
 Sleep 1s
 
-Type "printf '\\nfd + rg: faster find and grep\\n'"
+Type "kns default"
 Enter
-Type "fd 'Controller.java' /home/justin/hr-solution/src/main/java | head -4"
-Enter
-Type "rg '@RestController' /home/justin/hr-solution/src/main/java | head -3"
+Sleep 1s
+
+Type "k9"
 Enter
 Sleep 2s
 
@@ -79,24 +73,10 @@ Type "clear"
 Enter
 Sleep 500ms
 
-Type "printf 'Kubernetes shortcuts\\n\\n'"
-Enter
-Type "printf 'Aliases are configured automatically by pro-terminal-setup.\\n'"
-Enter
-Type "printf 'No manual alias setup needed. Just open a new shell.\\n\\n'"
-Enter
-Type "printf 'Try: k get pods\\n'"
-Enter
-Type "printf 'Try: kns default\\n'"
-Enter
-Type "printf 'Try: k9 or k9a\\n\\n'"
+Type "tmux"
 Enter
 Sleep 2s
 
-Type "printf 'tmux is included for persistent panes/windows\\n'"
+Type "pro-terminal-setup doctor"
 Enter
-Type "tmux -V"
-Enter
-Type "printf '\\nDone: install, learn, navigate, search, Kubernetes, tmux.\\n'"
-Enter
-Sleep 4s
+Sleep 3s

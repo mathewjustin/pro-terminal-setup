@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+cat <<'EOF'
+k9s
+context: dev-cluster   namespace: all
+
+NAMESPACE      NAME                         READY   STATUS
+default        api-7c8f9d7b95-k4m8s         1/1     Running
+monitoring     prometheus-server-0          2/2     Running
+kube-system    coredns-6f6b679f8f-hd2p6     1/1     Running
+EOF

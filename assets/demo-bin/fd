@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+case "$*" in
+  *Controller.java*)
+    cat <<'EOF'
+src/main/java/com/hrapp/controller/DepartmentController.java
+src/main/java/com/hrapp/controller/EmployeeController.java
+src/main/java/com/hrapp/controller/LeaveController.java
+src/main/java/com/hrapp/controller/PerformanceLabController.java
+EOF
+    ;;
+  *)
+    command fd "$@"
+    ;;
+esac

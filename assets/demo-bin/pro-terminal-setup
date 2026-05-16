@@ -1,0 +1,29 @@
+#!/usr/bin/env sh
+case "$1" in
+  install)
+    cat <<'EOF'
+Backed up existing dotfiles to ~/.config/pro-terminal/backups/...
+✓ wrote ~/.config/pro-terminal/zsh.zsh
+✓ wrote ~/.config/starship.toml
+✓ wrote ~/.config/ghostty/config.ghostty
+✓ wrote ~/.tmux.conf
+✓ added terminal-intro
+
+Open a new terminal and you're ready.
+EOF
+    ;;
+  doctor)
+    cat <<'EOF'
+ok   ghostty
+ok   zsh
+ok   starship
+ok   zoxide
+ok   eza / bat / fd / rg / fzf
+ok   kubectl / k9s
+ok   tmux
+EOF
+    ;;
+  *)
+    command pro-terminal-setup "$@"
+    ;;
+esac

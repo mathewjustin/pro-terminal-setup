@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+if [ "$1" = "-V" ]; then
+  command tmux -V
+  exit $?
+fi
+cat <<'EOF'
+tmux session started
+
+pane 1: mvn test
+pane 2: rg Employee
+pane 3: k9s
+
+Sessions stay alive even if the terminal closes.
+EOF

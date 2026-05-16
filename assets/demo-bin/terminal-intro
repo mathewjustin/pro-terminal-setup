@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+cat <<'EOF'
+Pro Terminal Intro
+
+Ghostty  = terminal window
+Starship = smarter prompt
+zoxide   = smarter cd
+fzf      = interactive search magic
+fd / rg  = faster find and grep
+kubectl  = k, kg, kd, kl, kns
+k9s      = Kubernetes UI
+tmux     = persistent panes and windows
+EOF

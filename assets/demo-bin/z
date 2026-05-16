@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+case "$1" in
+  hr|hr-solution)
+    printf '/home/justin/hr-solution\n'
+    ;;
+  *)
+    printf '/home/justin/%s\n' "$1"
+    ;;
+esac

@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+if [ "$1" = "get" ] && [ "$2" = "pods" ]; then
+  cat <<'EOF'
+NAME                         READY   STATUS    AGE
+api-7c8f9d7b95-k4m8s         1/1     Running   4h
+worker-55db977d9f-2h7tc      1/1     Running   4h
+EOF
+else
+  printf 'kubectl shortcut: k %s\n' "$*"
+fi

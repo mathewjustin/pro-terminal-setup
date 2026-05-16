@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+if [ "$1" = "install" ] && [ "$2" = "mathewjustin/pro-terminal/pro-terminal-setup" ]; then
+  cat <<'EOF'
+==> Installing pro-terminal-setup
+✓ starship  ✓ zoxide  ✓ fzf  ✓ eza  ✓ bat
+✓ fd        ✓ rg      ✓ zsh  ✓ kubectl
+✓ k9s       ✓ tmux
+🍺  pro-terminal-setup installed
+EOF
+  exit 0
+fi
+command brew "$@"

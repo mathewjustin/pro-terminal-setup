@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+case "$*" in
+  *@RestController*)
+    cat <<'EOF'
+EmployeeController.java:@RestController
+LeaveController.java:@RestController
+PerformanceLabController.java:@RestController
+EOF
+    ;;
+  *)
+    command rg "$@"
+    ;;
+esac
