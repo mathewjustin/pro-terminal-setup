@@ -183,4 +183,5 @@ assets/install-demo.mp4
 
 ## Launch Notes
 
-Want to share it? See [docs/LAUNCH.md](docs/LAUNCH.md).
+Want to share it? See [docs/LAUNCH.md](docs/LAUNCH.md) and
+[docs/STAR_HUNT.md](docs/STAR_HUNT.md).

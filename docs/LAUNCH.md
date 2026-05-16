@@ -160,3 +160,5 @@ Outline:
 - Add `pro-terminal-setup theme minimal`.
 - Add `pro-terminal-setup doctor --json`.
 - Add a real uninstall integration test.
+
+For the day-by-day growth sprint, see [STAR_HUNT.md](STAR_HUNT.md).
