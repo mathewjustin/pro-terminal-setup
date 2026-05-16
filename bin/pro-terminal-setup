@@ -51,6 +51,12 @@ case "${1:-install}" in
       mv "$tmp_tmux" "$home/.tmux.conf"
     fi
     chmod +x "$home/.config/pro-terminal/intro.sh"
+    mkdir -p "$home/.local/bin"
+    cat > "$home/.local/bin/terminal-intro" <<'INTRO'
+#!/usr/bin/env sh
+exec "$HOME/.config/pro-terminal/intro.sh" "$@"
+INTRO
+    chmod +x "$home/.local/bin/terminal-intro"
     append_source_line
     printf '\nInstalled pro terminal setup.\n'
     printf 'Open a new terminal, then run: terminal-intro\n'
