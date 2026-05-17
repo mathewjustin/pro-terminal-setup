@@ -182,7 +182,3 @@ The same tape writes:
 assets/install-demo.gif
 assets/install-demo.mp4
 ```
-
-## Launch Notes
-
-Want to share it? See [docs/LAUNCH.md](docs/LAUNCH.md).
