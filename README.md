@@ -9,8 +9,8 @@ Turn a fresh macOS or Linux shell into a polished Kubernetes-ready terminal in m
 ![Animated install demo](assets/install-demo.gif)
 
 `pro-terminal-setup` is a portable Ghostty/zsh setup with a curated prompt,
-navigation, fuzzy finding, JSON/YAML helpers, Kubernetes shortcuts, k9s, and
-tmux defaults.
+navigation, fuzzy finding, JSON/YAML helpers, Kubernetes shortcuts, k9s, tmux,
+and lazygit defaults.
 
 ## Why This Exists
 
@@ -76,6 +76,7 @@ config.
 | kubectl | Kubernetes aliases like `k`, `kg`, `kd`, `kl`, `kns` |
 | k9s | Kubernetes terminal UI with `k9` and `k9a` |
 | tmux | Portable terminal sessions, panes, and windows |
+| lazygit | Interactive Git UI with the `lg` alias |
 
 ## Commands
 
@@ -104,6 +105,7 @@ k get pods            # kubectl shortcut
 kns default           # persist namespace on current kube context
 k9                    # open k9s
 tmux                  # start a tmux session
+lg                    # open lazygit
 ```
 
 ## What It Changes

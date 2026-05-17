@@ -84,6 +84,10 @@ if command -v k9s >/dev/null 2>&1; then
   alias k9a='k9s --all-namespaces'
 fi
 
+if command -v lazygit >/dev/null 2>&1; then
+  alias lg='lazygit'
+fi
+
 export _ZO_ECHO=0
 if command -v zoxide >/dev/null 2>&1; then
   eval "$(zoxide init zsh)"

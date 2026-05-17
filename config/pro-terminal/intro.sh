@@ -4,7 +4,7 @@ cat <<'EOF'
 Pro Terminal Intro
 
 This setup is a portable terminal workflow for Ghostty, zsh, Starship,
-zoxide, fzf, modern Unix tools, jq/yq, Kubernetes, k9s, and tmux.
+zoxide, fzf, modern Unix tools, jq/yq, Kubernetes, k9s, tmux, and lazygit.
 
 1. The Pieces
 
@@ -23,6 +23,9 @@ Starship
 tmux
   The terminal workspace. It keeps sessions alive and lets you split panes
   and create windows inside one terminal.
+
+lazygit
+  A terminal UI for Git status, commits, branches, logs, and staging.
 
 2. Daily Navigation
 
@@ -141,7 +144,15 @@ tmux attach
 tmux ls
   List sessions.
 
-7. Portable Setup
+7. Git
+
+lg
+  Open lazygit in the current repository.
+
+lazygit
+  Same tool without the short alias.
+
+8. Portable Setup
 
 Copy these files to another machine:
   ~/.config/pro-terminal/zsh.zsh
@@ -169,6 +180,7 @@ Try these:
   yq . values.yaml
   cat pom.xml
   tmux
+  lg
   k9
 
 EOF
